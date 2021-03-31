@@ -14,6 +14,7 @@ public class EmployeeSalaryUpdaterWithRecord {
 
 
     public List<EmployeeRecord> computeAndUpdateSalaryIncrement(List<EmployerSalaryUpdateRecord> employerSalaryUpdates) {
+
         record LocalMapper(String employerId, double increment, Employee employee){}
 
         return employerSalaryUpdates
