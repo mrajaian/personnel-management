@@ -1,18 +1,16 @@
 package com.mimr.salaryUpdate;
 
 
-import com.google.common.annotations.VisibleForTesting;
 import com.mimr.EmployeeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeSalaryUpdater {
 
-    private final List<Employee> employees = new ArrayList<>();
-
-    public void computeAndUpdateSalaryIncrement(List<EmployerSalaryUpdate> employerSalaryUpdates) {
-        employerSalaryUpdates
+    public List<Employee> computeAndUpdateSalaryIncrement(List<EmployerSalaryUpdate> employerSalaryUpdates) {
+        return employerSalaryUpdates
                 .stream()
                 .<InnerClassMapper>mapMulti(
                         (employerSalaryUpdate, consumer) ->
@@ -23,12 +21,8 @@ public class EmployeeSalaryUpdater {
                                                         employerSalaryUpdate.getSalaryIncrement(),
                                                         employee))))
                 .map(t-> new Employee(t.getEmployee().getId(), t.getEmployee().getName(), t.getSalaryIncrement() * t.getEmployee().getSalary() + t.getEmployee().getSalary(), t.getEmployerId()))
-                .forEach(employees::add);
-    }
-
-    @VisibleForTesting
-    public List<Employee> getUpdatedEmployees(){
-        return employees;
+                //More processing steps
+                .collect(Collectors.toList());
     }
 
     static class InnerClassMapper {

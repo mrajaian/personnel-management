@@ -15,11 +15,11 @@ public class SalaryUpdateUsingRecordTest {
     public void test(){
 
         EmployeeSalaryUpdaterWithRecord employeeSalaryUpdater = new EmployeeSalaryUpdaterWithRecord();
-        employeeSalaryUpdater.computeAndUpdateSalaryIncrement(
+        List<EmployeeRecord> updatedEmployees = employeeSalaryUpdater.computeAndUpdateSalaryIncrement(
                 List.of(new EmployerSalaryUpdateRecord("id1", 0.12),
                         new EmployerSalaryUpdateRecord("id2", 0.05)));
-        Assertions.assertEquals(employeeSalaryUpdater.getUpdatedEmployees().size(), 4);
-        employeeSalaryUpdater.getUpdatedEmployees()
+        Assertions.assertEquals(updatedEmployees.size(), 4);
+        updatedEmployees
                 .forEach(employee -> Assertions.assertTrue(employee.salary()!=1000));
     }
 }

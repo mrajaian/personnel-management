@@ -13,11 +13,11 @@ public class SalaryUpdateTest {
     public void test(){
 
         EmployeeSalaryUpdater employeeSalaryUpdater = new EmployeeSalaryUpdater();
-        employeeSalaryUpdater.computeAndUpdateSalaryIncrement(
+        List<Employee> UpdatedEmployees = employeeSalaryUpdater.computeAndUpdateSalaryIncrement(
                 List.of(new EmployerSalaryUpdate("id1", 0.12),
                         new EmployerSalaryUpdate("id2", 0.05)));
-        Assertions.assertEquals(employeeSalaryUpdater.getUpdatedEmployees().size(), 4);
-        employeeSalaryUpdater.getUpdatedEmployees()
+        Assertions.assertEquals(UpdatedEmployees.size(), 4);
+        UpdatedEmployees
                 .forEach(employee -> Assertions.assertTrue(employee.getSalary()!=1000));
     }
 }
