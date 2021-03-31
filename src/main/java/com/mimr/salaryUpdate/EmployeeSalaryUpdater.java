@@ -16,10 +16,10 @@ public class EmployeeSalaryUpdater {
                 .stream()
                 .<InnerClassMapper>mapMulti(
                         (employerSalaryUpdate, consumer) ->
-                                EmployeeUtil.getEmployeesByEmployerId(employerSalaryUpdate.getId())
+                                EmployeeUtil.getEmployeesByEmployerId(employerSalaryUpdate.getEmployerId())
                                         .forEach(employee ->
                                                 consumer.accept(new InnerClassMapper(
-                                                        employerSalaryUpdate.getId(),
+                                                        employerSalaryUpdate.getEmployerId(),
                                                         employerSalaryUpdate.getSalaryIncrement(),
                                                         employee))))
                 .map(t-> new Employee(t.getEmployee().getId(), t.getEmployee().getName(), t.getSalaryIncrement() * t.getEmployee().getSalary() + t.getEmployee().getSalary(), t.getEmployerId()))

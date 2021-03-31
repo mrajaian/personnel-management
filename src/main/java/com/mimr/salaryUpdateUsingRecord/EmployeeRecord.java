@@ -9,4 +9,4 @@ public record EmployeeRecord(String id, String name, double salary, String emplo
         id = StringUtils.isEmpty(id) ? UUID.randomUUID().toString() : id;
     }
 }
-record EmployerSalaryUpdateRecord(String id, double increment){}
+record EmployerSalaryUpdateRecord(String employerId, double increment){}

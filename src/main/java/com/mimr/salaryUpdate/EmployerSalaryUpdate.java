@@ -1,16 +1,16 @@
 package com.mimr.salaryUpdate;
 
 public class EmployerSalaryUpdate {
-    private final String id;
+    private final String employerId;
     private final double salaryIncrement;
 
-    public EmployerSalaryUpdate(String id, double salaryIncrement) {
-        this.id = id;
+    public EmployerSalaryUpdate(String employerId, double salaryIncrement) {
+        this.employerId = employerId;
         this.salaryIncrement = salaryIncrement;
     }
 
-    public String getId() {
-        return id;
+    public String getEmployerId() {
+        return employerId;
     }
 
     public double getSalaryIncrement() {
@@ -25,14 +25,14 @@ public class EmployerSalaryUpdate {
         EmployerSalaryUpdate that = (EmployerSalaryUpdate) o;
 
         if (Double.compare(that.salaryIncrement, salaryIncrement) != 0) return false;
-        return id != null ? id.equals(that.id) : that.id == null;
+        return employerId != null ? employerId.equals(that.employerId) : that.employerId == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id != null ? id.hashCode() : 0;
+        result = employerId != null ? employerId.hashCode() : 0;
         temp = Double.doubleToLongBits(salaryIncrement);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
@@ -41,7 +41,7 @@ public class EmployerSalaryUpdate {
     @Override
     public String toString() {
         return "EmployerSalaryUpdate{" +
-                "id='" + id + '\'' +
+                "employerId='" + employerId + '\'' +
                 ", salaryIncrement=" + salaryIncrement +
                 '}';
     }

@@ -2,11 +2,12 @@ package com.mimr.salaryUpdateUsingRecord;
 
 
 import com.google.common.annotations.VisibleForTesting;
-import com.mimr.EmployeeUtil;
 import com.mimr.salaryUpdate.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mimr.EmployeeUtil.getEmployeesByEmployerId;
 
 public class EmployeeSalaryUpdaterWithRecord {
 
@@ -20,13 +21,14 @@ public class EmployeeSalaryUpdaterWithRecord {
                 .stream()
                 .<LocalMapper>mapMulti(
                         (employerSalaryUpdate, consumer) ->
-                                EmployeeUtil.getEmployeesByEmployerId(employerSalaryUpdate.id())
+                                getEmployeesByEmployerId(employerSalaryUpdate.employerId())
                                         .forEach(employee ->
                                                 consumer.accept(new LocalMapper(
-                                                        employerSalaryUpdate.id(),
+                                                        employerSalaryUpdate.employerId(),
                                                         employerSalaryUpdate.increment(),
                                                         employee))))
-                .map(t-> new EmployeeRecord(t.employee().getId(), t.employee().getName(), t.increment() * t.employee().getSalary() + t.employee().getSalary(), t.employerId()))
+                .map(t-> new EmployeeRecord(t.employee().getId(), t.employee().getName(),
+                        t.increment() * t.employee().getSalary() + t.employee().getSalary(), t.employerId()))
                 .forEach(employees::add);
     }
 
